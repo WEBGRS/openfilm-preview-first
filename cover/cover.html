@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  /* 1600x900 cover: a timeline of placeholder cards, sound tracks left for later */
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1600px; height: 900px; }
+  body {
+    background: #f4f1ea;
+    font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+    color: #1d1b18;
+    padding: 0 104px; justify-content: center; position: relative;
+    display: flex; flex-direction: column; gap: 28px;
+  }
+  .ruler { display: flex; justify-content: space-between; font-size: 22px; color: #6d675c; padding: 0 4px; }
+  .track { display: flex; gap: 14px; height: 320px; }
+  .card {
+    background: #fff; border: 3px solid #1d1b18; border-radius: 22px;
+    padding: 26px 26px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .card .n { font-size: 26px; font-weight: 700; color: #e0572d; }
+  .card .bar { height: 16px; border-radius: 8px; background: #d9d3c6; }
+  .card .bar.s { width: 62%; }
+  .card .bar.t { width: 80%; background: #ebe6db; }
+  .card .len { margin-top: auto; font-size: 22px; color: #6d675c; }
+  .lane {
+    height: 86px; border: 3px dashed #b9b1a1; border-radius: 18px;
+    display: flex; align-items: center; padding: 0 28px; gap: 18px;
+    font-size: 26px; color: #8a8273;
+  }
+  .lane svg { width: 34px; height: 34px; }
+  .playhead { position: absolute; left: 530px; top: 128px; bottom: 128px; width: 4px; background: #e0572d; border-radius: 2px; }
+  .playhead::before { content: ""; position: absolute; top: -10px; left: -10px; width: 24px; height: 24px; border-radius: 50%; background: #e0572d; }
+</style>
+</head>
+<body>
+  <div class="playhead"></div>
+  <div class="ruler"><span>0:00</span><span>0:30</span><span>1:00</span><span>1:30</span><span>2:00</span><span>2:30</span></div>
+  <div class="track">
+    <div class="card" style="flex: 20"><div class="n">01</div><div class="bar"></div><div class="bar s"></div><div class="bar t"></div><div class="len">20s</div></div>
+    <div class="card" style="flex: 42"><div class="n">02</div><div class="bar"></div><div class="bar s"></div><div class="bar t"></div><div class="bar t"></div><div class="len">42s</div></div>
+    <div class="card" style="flex: 28"><div class="n">03</div><div class="bar"></div><div class="bar s"></div><div class="bar t"></div><div class="len">28s</div></div>
+    <div class="card" style="flex: 40"><div class="n">04</div><div class="bar"></div><div class="bar s"></div><div class="bar t"></div><div class="bar t"></div><div class="len">40s</div></div>
+    <div class="card" style="flex: 20"><div class="n">05</div><div class="bar"></div><div class="bar s"></div><div class="len">20s</div></div>
+  </div>
+  <div class="lane">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg>
+    <span>Voice-over · later</span>
+  </div>
+  <div class="lane">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+    <span>Music · later</span>
+  </div>
+</body>
+</html>

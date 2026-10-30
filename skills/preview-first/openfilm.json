@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "repository": "https://github.com/WEBGRS/openfilm-preview-first/tree/main/skills/preview-first",
+  "kind": "workflow",
+  "order": 1,
+  "icon": "layers",
+  "cover": "cover.jpg",
+  "title": {
+    "en": "Preview first",
+    "zh-CN": "先出预览",
+    "ja": "まずプレビュー",
+    "ko": "먼저 미리보기",
+    "es": "Primero, la vista previa"
+  },
+  "summary": {
+    "en": "The whole film as a quick placeholder preview first; pictures after you approve it, voice and music last.",
+    "zh-CN": "先用几分钟出一版完整的占位预览，你确认后再做画面，配音和音乐最后做。",
+    "ja": "まず数分で全体の仮プレビュー。確認後に映像、ナレーションと音楽は最後に。",
+    "ko": "먼저 몇 분 만에 전체 임시 미리보기를 만들고, 확인 후 화면을, 내레이션과 음악은 마지막에 만듭니다.",
+    "es": "Primero una vista previa provisional de toda la película; las imágenes cuando la apruebes, la voz y la música al final."
+  },
+  "details": {
+    "en": "Best for: any new film when you want to see its structure before waiting on the slow parts.\nWhat it does: puts every section on the timeline as a placeholder card with its title, what it will show and its planned words, at its planned length, in a few minutes; then stops. Pictures come after you approve, voice-over, music and effects after that, and export only when you ask. Before the first paid service runs, it counts what the film will ask of it and waits for your yes.",
+    "zh-CN": "适合：任何新片子，想先看整体框架，再花时间做费时的部分。\n它会：几分钟内把每一段做成时间线上的一张占位卡，写着标题、要放的画面和旁白草稿，时长按旁白估算，然后停下等你看；你确认后再做真画面，配音、音乐、音效放在最后，只在你要时才导出。第一次调用付费服务前，先报出这条片子要用多少，等你同意。",
+    "ja": "こんなときに：時間のかかる作業の前に、新しい動画の構成を先に見たいとき。\nすること：数分で各パートをタイムライン上の仮カード（タイトル、映す内容、予定のナレーション、予定の長さ）にして止まります。確認後に映像を作り、ナレーション、音楽、効果音はその後、書き出しは頼まれたときだけ。有料サービスを初めて使う前に、この動画でどれだけ使うかを数えて伝え、あなたの了承を待ちます。",
+    "ko": "이럴 때: 오래 걸리는 작업 전에 새 영상의 구성을 먼저 보고 싶을 때.\n하는 일: 몇 분 안에 각 구간을 타임라인의 임시 카드(제목, 보여 줄 내용, 예정된 내레이션, 예정 길이)로 만들고 멈춥니다. 확인 후 화면을 만들고, 내레이션·음악·효과음은 그다음, 내보내기는 요청할 때만 합니다.유료 서비스를 처음 쓰기 전에, 이 영상에 얼마나 쓸지 세어 알려 주고 승인을 기다립니다.",
+    "es": "Ideal para: cualquier película nueva cuando quieres ver su estructura antes de esperar a las partes lentas.\nQué hace: en pocos minutos pone cada sección en la línea de tiempo como una tarjeta provisional con su título, lo que mostrará y el texto previsto, con su duración prevista, y se detiene. Las imágenes llegan cuando lo apruebas, la voz, la música y los efectos después, y solo exporta cuando lo pides. Antes de usar por primera vez un servicio de pago, cuenta cuánto le pedirá la película y espera tu sí."
+  }
+}
