@@ -9,8 +9,8 @@ voice-over, music and export last.
 | --- | --- | --- |
 | <img src="skills/preview-first/cover.jpg" width="200" alt=""> | [Preview first](skills/preview-first) | The whole film as a quick placeholder preview, then pictures, then sound, each stage after you approve the last. |
 
-It is for the film you left running overnight and found wrong in the morning, and for the hour-long run that is
-still not the film you asked for. Nothing that costs time or money happens on a structure you have not seen.
+It is for the film you left running overnight and found wrong in the morning, and for the hour-long run that
+still isn't the film you asked for. Nothing that costs time or money happens on a structure you haven't seen.
 
 ## What the agent does
 
@@ -54,7 +54,7 @@ in five languages, and no stray files.
 
 OpenFilm 技能：先看到整条片子，再做慢的部分。几分钟内，智能体把每一段做成一张占位卡片放上时间线：标题、这段画面放什么、这段要说的话，时长按念完这些话算，然后停下。你在 Studio 里调顺序、改时长、改文字。你点头后才做画面；配音、音乐和导出放在最后。
 
-适合这两种情况：晚上让它自己剪，早上起来发现方向就错了；或者剪了一个小时还不是你要的片子。结构你没看过之前，不花时间，也不花钱。
+适合这两种情况：晚上让它自己剪，早上起来发现方向就错了；或者剪了一个小时还不是你要的片子。你没看过结构之前，它不做费时或花钱的事。
 
 **三次停顿**：预览之后、画面之后、声音之后，每次都停下等你确认。你在 Studio 里改过的地方就是新的方案。说「一口气做完」就不停。
 
