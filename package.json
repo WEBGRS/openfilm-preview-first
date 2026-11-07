@@ -1,0 +1,13 @@
+{
+  "name": "openfilm-preview-first",
+  "version": "0.2.1",
+  "private": true,
+  "description": "An OpenFilm skill: show the whole film as a placeholder preview before anything slow is made.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "check": "node scripts/check.mjs"
+  }
+}

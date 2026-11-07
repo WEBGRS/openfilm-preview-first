@@ -9,3 +9,4 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/check.mjs
+      - run: npm test

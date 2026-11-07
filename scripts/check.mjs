@@ -70,6 +70,15 @@ for (const name of names) {
   if (!Number.isInteger(shown.order)) say(name, 'its order is a whole number');
   else if (orders.has(shown.order)) say(name, `its order ${shown.order} is ${orders.get(shown.order)}'s too`);
   else orders.set(shown.order, name);
+  if (shown.needs !== undefined) {
+    const langs = shown.needs && typeof shown.needs === 'object' && !Array.isArray(shown.needs) ? Object.entries(shown.needs) : null;
+    if (!langs || !langs.length || langs.some(([lang, text]) => !LANGUAGES.includes(lang) || typeof text !== 'string' || !text.trim())) {
+      say(name, `its needs say, by language (${LANGUAGES.join(', ')}), what it needs beyond OpenFilm`);
+    }
+  }
+  if (shown.platforms !== undefined && (!Array.isArray(shown.platforms) || !shown.platforms.length || shown.platforms.some((p) => !['macos', 'windows', 'linux'].includes(p)))) {
+    say(name, 'its platforms are some of macos, windows, linux');
+  }
   for (const field of ['title', 'summary', 'details']) {
     for (const lang of LANGUAGES) if (!shown[field]?.[lang]) say(name, `no ${field} in ${lang}`);
   }
