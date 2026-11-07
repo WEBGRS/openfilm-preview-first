@@ -141,10 +141,23 @@ const film = existsSync(filmPath) ? readFilm(readFileSync(filmPath, 'utf8'), bas
 const material = flag('material');
 let used = null;
 if (film && material && existsSync(material)) {
-  const html = readFileSync(filmPath, 'utf8');
-  const pages = film.clips.filter((c) => c.tag === 'iframe' && existsSync(join(base, c.file))).map((c) => readFileSync(join(base, c.file), 'utf8')).join('\n');
   const names = readdirSync(material).filter((n) => !/\.(txt|md)$/i.test(n));
-  used = { named: names.filter((n) => html.includes(n) || pages.includes(n)).length, of: names.length };
+  const local = (f) => basename(decodeURIComponent(f.split(/[?#]/)[0]));
+  // The person's files that are clips of film.html
+  const asClips = new Set(film.clips.map((c) => local(c.file)).filter((n) => names.includes(n)));
+  const pages = film.clips.filter((c) => c.tag === 'iframe' && existsSync(join(base, c.file))).map((c) => readFileSync(join(base, c.file), 'utf8'));
+  // Their files a card's own markup loads
+  const inPages = new Set();
+  for (const p of pages) {
+    for (const m of p.matchAll(/(?:src|href)\s*=\s*["']([^"']+)["']|url\(\s*["']?([^)"']+)/g)) {
+      const n = local(m[1] ?? m[2]);
+      if (names.includes(n) && !asClips.has(n)) inPages.add(n);
+    }
+  }
+  // Their files only named in the words on a card
+  const words = pages.map((p) => p.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ')).join('\n');
+  const namedInText = names.filter((n) => words.includes(n) && !asClips.has(n) && !inPages.has(n));
+  used = { of: names.length, asClips: asClips.size, inPages: inPages.size, namedInText: namedInText.length };
 }
 const assets = existsSync(join(base, 'assets')) ? readdirSync(join(base, 'assets'), { recursive: true }).filter((f) => /\.[a-z0-9]+$/i.test(f)) : [];
 const byExt = (re) => assets.filter((f) => re.test(f)).length;
@@ -170,7 +183,7 @@ const out = {
   finalFilm: film && { lastWriteMinutes: +((statSync(filmPath).mtimeMs - t0) / 60000).toFixed(1), costAtLastWrite: costBy(statSync(filmPath).mtimeMs), frame: `${film.w}x${film.h}`, orientation: film.w >= film.h ? 'landscape' : 'portrait', seconds: film.total, wantSeconds: want, gaps: film.gaps, tracks: film.tracks, clips: film.clips.length, audioClips: film.audio, videoClips: film.video, captionTracks: film.captionTracks },
   madeOutside: madeFiles.map(probe),
   assets: { audio: byExt(/\.(wav|mp3|m4a|ogg|flac|aac)$/i), video: byExt(/\.(mp4|webm|mov|mkv)$/i), image: byExt(/\.(png|jpe?g|gif|webp|svg)$/i), other: assets.length - byExt(/\.(wav|mp3|m4a|ogg|flac|aac|mp4|webm|mov|mkv|png|jpe?g|gif|webp|svg)$/i) },
-  materialNamed: used,
+  material: used,
   cards: { n: cardRows.length, paceInRange: cardRows.filter((c) => c.pace >= lo && c.pace <= hi).length, medianPace: cardRows.length ? cardRows.map((c) => c.pace).sort((a, b) => a - b)[Math.floor(cardRows.length / 2)] : null, unit: cardRows[0]?.lang === 'zh' ? 'characters per second' : 'words per second', range: [lo, hi] },
   finalMessageAsks: /[?？]/.test(finalText.slice(-600)),
   finalMessageChars: finalText.length,

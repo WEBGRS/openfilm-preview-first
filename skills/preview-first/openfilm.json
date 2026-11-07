@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": "https://github.com/WEBGRS/openfilm-preview-first/tree/main/skills/preview-first",
   "kind": "workflow",
   "order": 1,
@@ -20,11 +20,11 @@
     "es": "Primero una vista previa provisional de toda la película; las imágenes cuando la apruebes, la voz y la música al final."
   },
   "details": {
-    "en": "Best for: a long or costly new film, or when you ask for an outline, draft or rough cut first.\nWhat it does: puts every section on the timeline as a placeholder card with its title, what it will show and its planned words, at its planned length, in a few minutes; then stops. Pictures come after you approve, voice-over, music and effects after that, and export only when you ask. Before the first paid service runs, it counts what the film will ask of it and waits for your yes.",
-    "zh-CN": "适合：较长或花钱的新片子，或你想先看大纲、草稿、粗剪的时候。\n它会：几分钟内把每一段做成时间线上的一张占位卡，写着标题、要放的画面和旁白草稿，时长按旁白估算，然后停下等你看；你确认后再做真画面，配音、音乐、音效放在最后，只在你要时才导出。第一次调用付费服务前，先报出这条片子要用多少，等你同意。",
-    "ja": "こんなときに：長い、またはお金のかかる新しい動画や、先にアウトラインやラフカットを見たいとき。\nすること：数分で各パートをタイムライン上の仮カード（タイトル、映す内容、予定のナレーション、予定の長さ）にして止まります。確認後に映像を作り、ナレーション、音楽、効果音はその後、書き出しは頼まれたときだけ。有料サービスを初めて使う前に、この動画でどれだけ使うかを数えて伝え、あなたの了承を待ちます。",
-    "ko": "이럴 때: 길거나 비용이 드는 새 영상이거나, 개요·초안·러프 컷을 먼저 보고 싶을 때.\n하는 일: 몇 분 안에 각 구간을 타임라인의 임시 카드(제목, 보여 줄 내용, 예정된 내레이션, 예정 길이)로 만들고 멈춥니다. 확인 후 화면을 만들고, 내레이션·음악·효과음은 그다음, 내보내기는 요청할 때만 합니다. 유료 서비스를 처음 쓰기 전에, 이 영상에 얼마나 쓸지 세어 알려 주고 승인을 기다립니다.",
-    "es": "Ideal para: una película nueva larga o costosa, o cuando pides primero un esquema, un borrador o un montaje preliminar.\nQué hace: en pocos minutos pone cada sección en la línea de tiempo como una tarjeta provisional con su título, lo que mostrará y el texto previsto, con su duración prevista, y se detiene. Las imágenes llegan cuando lo apruebas, la voz, la música y los efectos después, y solo exporta cuando lo pides. Antes de usar por primera vez un servicio de pago, cuenta cuánto le pedirá la película y espera tu sí."
+    "en": "Best for: a long or costly new film, or when you ask for an outline, draft or rough cut first.\nWhat it does: puts every section on the timeline in a few minutes, at its planned length with its planned words: your own photos and clips in place where you gave some, a plain placeholder card where you did not; then stops. Pictures come after you approve, voice-over, music and effects after that, and export only when you ask. Before the first paid service runs, it counts what the film will ask of it and waits for your yes.",
+    "zh-CN": "适合：较长或花钱的新片子，或你想先看大纲、草稿、粗剪的时候。\n它会：几分钟内把每一段放上时间线，时长按旁白估算，旁白草稿跟着：你给了照片或视频，就直接用你自己的原片；没有素材的段落是一张占位卡。然后停下等你看。你确认后再做真画面，配音、音乐、音效放在最后，只在你要时才导出。第一次调用付费服务前，先报出这条片子要用多少，等你同意。",
+    "ja": "こんなときに：長い、またはお金のかかる新しい動画や、先にアウトラインやラフカットを見たいとき。\nすること：数分で各パートを、予定の長さと予定のナレーション付きでタイムラインに並べます。写真や映像を渡した場合はあなた自身の素材をそのまま、素材のないパートは仮カードで。そこで止まります。確認後に映像を作り、ナレーション、音楽、効果音はその後、書き出しは頼まれたときだけ。有料サービスを初めて使う前に、この動画でどれだけ使うかを数えて伝え、あなたの了承を待ちます。",
+    "ko": "이럴 때: 길거나 비용이 드는 새 영상이거나, 개요·초안·러프 컷을 먼저 보고 싶을 때.\n하는 일: 몇 분 안에 각 구간을 예정 길이와 예정된 내레이션과 함께 타임라인에 올립니다. 사진이나 영상을 준 경우에는 당신의 자료를 그대로, 자료가 없는 구간은 임시 카드로 두고 멈춥니다. 확인 후 화면을 만들고, 내레이션·음악·효과음은 그다음, 내보내기는 요청할 때만 합니다. 유료 서비스를 처음 쓰기 전에, 이 영상에 얼마나 쓸지 세어 알려 주고 승인을 기다립니다.",
+    "es": "Ideal para: una película nueva larga o costosa, o cuando pides primero un esquema, un borrador o un montaje preliminar.\nQué hace: en pocos minutos pone cada sección en la línea de tiempo con su duración y su texto previstos: tus propias fotos y clips en su sitio si los diste, una tarjeta provisional si no. Y se detiene. Las imágenes llegan cuando lo apruebas, la voz, la música y los efectos después, y solo exporta cuando lo pides. Antes de usar por primera vez un servicio de pago, cuenta cuánto le pedirá la película y espera tu sí."
   },
   "needs": {
     "en": "Nothing beyond OpenFilm for the preview. Later stages use the voice, music and picture services you connect, or OpenFilm's free library.",

@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 
-const MEASURE = join(import.meta.dirname, '..', 'evals', 'measure.mjs');
+const MEASURE = process.env.MEASURE_SCRIPT ?? join(import.meta.dirname, '..', 'evals', 'measure.mjs');
 const WORDS = 'the saturn rocket lifts off from the pad at kennedy and the whole crew rides it to orbit'; // 18 words
 
 /** A film.html of `n` twelve-second cards; `skip` leaves one card out, `sound` adds a music clip */
@@ -17,12 +17,12 @@ function film(n, { skip = -1, sound = false, w = 1920, h = 1080 } = {}) {
 <section>${cards.join('\n')}</section>${sound ? '<section><audio src="assets/bed.mp3#t=0,60" at="0"></audio></section>' : ''}</body></html>`;
 }
 
-/** A run folder as of-eval.mjs leaves it, holding `html` as the film the agent wrote */
-function makeRun(html, { final = 'The preview is up. Shall I go on to the pictures?' } = {}) {
+/** A run folder as of-eval.mjs leaves it, holding `html` as the film the agent wrote; `page(i)` is card i's markup */
+function makeRun(html, { final = 'The preview is up. Shall I go on to the pictures?', page = (i) => `<h1>Section ${i}</h1><p>${WORDS}</p>` } = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'pf-measure-'));
   mkdirSync(join(dir, 'work', 'cards'), { recursive: true });
   writeFileSync(join(dir, 'work', 'film.html'), html);
-  for (let i = 0; i < 12; i++) writeFileSync(join(dir, 'work', 'cards', `${i}.html`), `<h1>Section ${i}</h1><p>${WORDS}</p>`);
+  for (let i = 0; i < 12; i++) writeFileSync(join(dir, 'work', 'cards', `${i}.html`), page(i));
   const usage = { input_tokens: 2, output_tokens: 100, cache_read_input_tokens: 10000, cache_creation_input_tokens: 1000 };
   const lines = [
     { type: 'system', subtype: 'init', model: 'claude-sonnet-5-5' },
@@ -90,4 +90,47 @@ test('a closing message with no question is read as not asking', () => {
   const dir = makeRun(film(10), { final: 'Done. The film is finished.' });
   try { assert.equal(measure(dir).finalMessageAsks, false); }
   finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+/** The person's material: three photos and a note, as a folder beside the run */
+function material() {
+  const dir = mkdtempSync(join(tmpdir(), 'pf-material-'));
+  for (const n of ['a.jpg', 'b.jpg', 'c.jpg', 'notes.txt']) writeFileSync(join(dir, n), 'x');
+  return dir;
+}
+
+/** A film of three 40 s sections: `clips` are the person's photos as clips, cards (pages) carry the words */
+function photoFilm(clips) {
+  const imgs = clips.map((n, i) => `<img src="assets/${n}#t=0,40" at="${i * 40}">`).join('\n');
+  const pages = [0, 1, 2].map((i) => `<iframe src="cards/${i}.html#t=0,40" at="${i * 40}"></iframe>`).join('\n');
+  return `<!doctype html><html><head><meta name="viewport" content="width=1920, height=1080"></head><body>
+<section>${pages}</section><section>${imgs}</section></body></html>`;
+}
+
+test('cards that only name the photos place none of them', () => {
+  // The fault the first count missed: every file name sits in a card's words, no photo is a clip
+  const mat = material();
+  const dir = makeRun(film(10), { page: (i) => `<h1>Section ${i}</h1><p>On screen: ${['a.jpg', 'b.jpg', 'c.jpg'][i % 3]}</p><p>${WORDS}</p>` });
+  try {
+    const m = measure(dir, '--material', mat);
+    assert.deepEqual(m.material, { of: 3, asClips: 0, inPages: 0, namedInText: 3 });
+  } finally { rmSync(dir, { recursive: true, force: true }); rmSync(mat, { recursive: true, force: true }); }
+});
+
+test('photos placed as clips are counted as clips, with or without their names in the words', () => {
+  const mat = material();
+  const dir = makeRun(photoFilm(['a.jpg', 'b.jpg', 'c.jpg']), { page: (i) => `<p>${WORDS}</p>` });
+  try {
+    const m = measure(dir, '--material', mat);
+    assert.deepEqual(m.material, { of: 3, asClips: 3, inPages: 0, namedInText: 0 });
+  } finally { rmSync(dir, { recursive: true, force: true }); rmSync(mat, { recursive: true, force: true }); }
+});
+
+test('a photo a card loads itself is counted apart from clips and from names', () => {
+  const mat = material();
+  const dir = makeRun(photoFilm(['a.jpg']), { page: (i) => (i === 1 ? '<img src="../b.jpg"><p>Words.</p>' : `<p>Words about c.jpg only.</p>`) });
+  try {
+    const m = measure(dir, '--material', mat);
+    assert.deepEqual(m.material, { of: 3, asClips: 1, inPages: 1, namedInText: 1 });
+  } finally { rmSync(dir, { recursive: true, force: true }); rmSync(mat, { recursive: true, force: true }); }
 });
